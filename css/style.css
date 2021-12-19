@@ -1,0 +1,36 @@
+body {
+  font-family: DM Sans;
+}
+
+#backgound-img{
+  background-image: url('/img/News-backgound.jpg');
+  background-repeat: no-repeat;
+  filter: grayscale(1);
+   background-size: cover;
+}
+
+
+.img-fluid{
+  transition: 1s;
+}
+.card-body .img-fluid:hover {
+  transform: scale(1.2);
+
+}
+
+#more-btn:after {
+  position: absolute;
+  content: '';
+  bottom: 9px;
+  left: 0;
+  margin: auto;
+  right: 0;
+  width: 40px;
+  height: 2px;
+  background: currentColor;
+}
+
+#more-btn:hover{
+  color:slategrey;
+  
+}
