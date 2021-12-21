@@ -18,9 +18,7 @@
       crossorigin="anonymous"
     ></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 </head>
 <body>
 
@@ -49,23 +47,21 @@
       <div class="row">
         <div class="col"> 
           <h1 class="text-white row m-4 justify-content-center align-items-center h-100 fw-bolder"> TODAY NEWS </h1>
-        </div>
-         
+        </div>      
               <!-- wheather Card-->
-            <div class="col-md-8 col-lg-7 justify-content-center d-flex">
-              <div class="card w-50 " style="color: #4B515D; border-radius: 35px;">
+            <div class="col-md-8 col-lg-7 justify-content-center d-flex mt-4">
+              <div class="card w-50" style="color: #4B515D; border-radius: 35px;">
                 <div class="card-body p-4" id="wheather-card">
-
                 </div>
+
                 <div class="card-footer bg-transparent border-success">
                   <div class="input-group ">
-                      <input type="search" id="wheather-search-input" class="form-control" placeholder="City" />
+                      <input type="search" id="wheather-search-input" onfocus="this.value=''" class="form-control" placeholder="City" />
                       <button type="button" class="btn btn-primary" id="wheather-search-btn">
                         <i class="fas fa-search"></i>
                       </button>
                     </div>
                 </div>
-                
                 </div>
               </div>     
         </div>
@@ -79,23 +75,32 @@
         <div class="row m-2">
             <div class="col-12">
                 <!--search bar-->
-                <form action="">
                     <div class="p-1 bg-light rounded rounded-pill shadow-sm my-4 ">
                       <div class="input-group">
-                        <input type="search" id="news-search-input"  placeholder="What're you searching for?" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+                        <input type="search" id="news-search-input" onfocus="this.value=''" placeholder="What're you searching for?" aria-describedby="button-addon1" class="form-control border-0 bg-light">
                         <div class="input-group-append">
                           <button id="news-search-btn" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
                         </div>
                       </div>
-                    </div></form>
+                    </div> 
             </div>
              <!--news card-->
              <div id="newsCard" class="row m-3">     
       </div>
         </div>
+        <!-- *** Pagination  *** -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center pagination-lg">
+           <li class="page-item"  id="prev"><a class="page-link " href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link"  id="current" href="#">1</a></li>
+            <li class="page-item" id ="next" ><a class="page-link" href="#" >Next</a></li>
+            </ul>
+            </nav>
+          
     </div>
 
-    <script src="js/weather.js"></script>
+
+    <script src="/js/weather.js"></script>
     <script src="/js/news.js"></script>
  
     <script
