@@ -9,18 +9,18 @@ let prevPage = 0;
 let nextPag = 2;
 let totalPages = 5;
 
-let newsUrl = "https://newsapi.org/v2/top-headlines?category=General&page=1&sortBy=popularity&apiKey=367b833f122d4dd2a7f351680d0e960a";
+let newsUrl =
+  "https://newsapi.org/v2/top-headlines?category=General&page=1&sortBy=popularity&apiKey=367b833f122d4dd2a7f351680d0e960a";
 printNews();
 
 //search news
 searchBtn1.addEventListener("click", function () {
-  newsUrl = "https://newsapi.org/v2/everything?q=" + searchInput1.value + "&page=1&sortBy=popularity&apiKey=367b833f122d4dd2a7f351680d0e960a";
-  currentPage = 1;
-  prevPage = 0;
-  nextPag = 2;
-  totalPages = 5;
-  current.innerHTML = currentPage;
-  printNews();
+  newsUrl =
+    "https://newsapi.org/v2/everything?q=" +
+    searchInput1.value +
+    "&page=1&sortBy=popularity&apiKey=367b833f122d4dd2a7f351680d0e960a";
+    resetPagination();
+    printNews();
 });
 
 // change category
@@ -28,19 +28,35 @@ $("ul.navbar-nav > li").click(function (e) {
   e.preventDefault();
   var getItem = $(this).text();
   var id = this.id;
-  currentPage = 1;
-  prevPage = 0;
-  nextPag = 2;
-  totalPages = 5;
-  current.innerHTML = currentPage;
-  newsUrl = "https://newsapi.org/v2/top-headlines?category=" + id + "&sortBy=popularity&page=1&apiKey=367b833f122d4dd2a7f351680d0e960a";
+  resetPagination();
+  newsUrl =
+    "https://newsapi.org/v2/top-headlines?category=" +
+    id +
+    "&sortBy=popularity&page=1&apiKey=367b833f122d4dd2a7f351680d0e960a";
   printNews();
 });
+
 
 function printNews() {
   lastUrl = newsUrl;
   fetch(newsUrl).then((response) => {
     response.json().then((res) => {
+      // chack for author & pic & desc
+      res.articles.map((articale) => {
+        if (articale.author == null) {
+          articale.author = " ";
+        }
+
+        if (articale.description == null) {
+          articale.description = " ";
+        }
+
+        if (articale.urlToImage == null) {
+          articale.urlToImage = "/img/News-backgound.jpg";
+        }
+
+      });
+      // set the articles in html
       document.querySelector("#newsCard").innerHTML = res.articles
         .map(
           (articale) =>
@@ -57,7 +73,9 @@ function printNews() {
                  <p class="card-text text-muted" >${articale.description}</p>
                  <p class="card-text text-left "> ${articale.author}</p>
              </div>
-             <div class="card-footer bg-transparent ">  <a href="${articale.url}" class=" btn fw-bold" id="more-btn"> READ MORE</a>
+             <div class="card-footer bg-transparent ">  <a href="${
+               articale.url
+             }" class=" btn fw-bold" id="more-btn"> READ MORE</a>
              </div>
          </div>
        </div>
@@ -80,13 +98,18 @@ function printNews() {
   }
 }
 
+
+
 // pagination  (next)
 next.addEventListener("click", () => {
   if (nextPag <= totalPages) {
     nextPag++;
     prevPage++;
     currentPage++;
-    newsUrl = "https://newsapi.org/v2/top-headlines?category=General&page=" + currentPage + "&sortBy=popularity&apiKey=367b833f122d4dd2a7f351680d0e960a";
+    newsUrl =
+      "https://newsapi.org/v2/top-headlines?category=General&page=" +
+      currentPage +
+      "&sortBy=popularity&apiKey=367b833f122d4dd2a7f351680d0e960a";
     current.innerHTML = currentPage;
     printNews();
   }
@@ -98,8 +121,21 @@ prev.addEventListener("click", () => {
     nextPag--;
     prevPage--;
     currentPage--;
-    newsUrl = "https://newsapi.org/v2/top-headlines?category=General&page=" + currentPage + "&sortBy=popularity&apiKey=367b833f122d4dd2a7f351680d0e960a";
+    newsUrl =
+      "https://newsapi.org/v2/top-headlines?category=General&page=" +
+      currentPage +
+      "&sortBy=popularity&apiKey=367b833f122d4dd2a7f351680d0e960a";
     current.innerHTML = currentPage;
     printNews();
   }
 });
+
+
+function resetPagination() {
+  currentPage = 1;
+  prevPage = 0;
+  nextPag = 2;
+  totalPages = 5;
+  current.innerHTML = currentPage;
+  } 
+  
